@@ -11,7 +11,9 @@ import lightgbm as lgb
 import xgboost as xgb
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import pickle 
+import os
 
+path = os.path.join(os.getcwd(), "houseprice")
 data = pd.read_csv(r"C:\Users\vineet\Desktop\house_price_project\USA_Housing.csv")
 
 #Preprocessing
@@ -50,7 +52,7 @@ results = []
 
 for name, model in models.items():
     model.fit(X_train, y_train)
-    y_pred = model.predict(y_test)
+    y_pred = model.predict(X_test)
     
     mae = mean_absolute_error(y_test, y_pred)
     mse = mean_squared_error(y_test, y_pred)
@@ -64,9 +66,11 @@ for name, model in models.items():
      "R2" : r2   
     })
     
-    with open(f"{name}.pkl", "wb" ) as f: #writing in binary (idk wtf see documentation)
+    
+    
+    file_path = os.path.join(path, f"{name}.pkl")
+    with open(file_path, "wb") as f:  # Writing in binary mode
         pickle.dump(model, f)
-        
 
 
 results_df = pd.DataFrame(results)
