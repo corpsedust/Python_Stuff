@@ -16,7 +16,7 @@ data = pd.read_csv(r"C:\Users\vineet\Desktop\house_price_project\USA_Housing.csv
 
 #Preprocessing
 
-X = data.drop(["Prices", "Address"], axis = 1)
+X = data.drop(["Price", "Address"], axis = 1)
 y = data["Price"]
 
 
@@ -34,7 +34,7 @@ models = {
     "LassoRegression" : Lasso(),
     "ElasticNet" : ElasticNet(),
     "PolynomialRegression" : Pipeline([
-        ("poly", PolynomialFeatures(degreee = 2)),
+        ("poly", PolynomialFeatures(degree = 2)),
         ("linear", LinearRegression())
     ]),
     "SGDRegressor" : SGDRegressor(),
@@ -64,7 +64,7 @@ for name, model in models.items():
      "R2" : r2   
     })
     
-    with open(f"{model}.pkl", "wb" ) as f: #writing in binary (idk wtf see documentation)
+    with open(f"{name}.pkl", "wb" ) as f: #writing in binary (idk wtf see documentation)
         pickle.dump(model, f)
         
 
