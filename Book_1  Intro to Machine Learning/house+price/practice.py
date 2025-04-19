@@ -11,3 +11,65 @@ import lightgbm as lgb
 import xgboost as xgb
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import pickle 
+
+data = pd.read_csv(r"C:\Users\vineet\Desktop\house_price_project\USA_Housing.csv")
+
+#Preprocessing
+
+X = data.drop(["Prices", "Address"], axis = 1)
+y = data["Price"]
+
+
+#Split data
+
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size= 0.2, random_state= 0)
+
+
+#Define models
+
+models = {
+    "LinearRegression" : LinearRegression(),
+    "RobustRegression" : HuberRegressor(),
+    "RidgeRegression" : Ridge(),
+    "LassoRegression" : Lasso(),
+    "ElasticNet" : ElasticNet(),
+    "PolynomialRegression" : Pipeline([
+        ("poly", PolynomialFeatures(degreee = 2)),
+        ("linear", LinearRegression())
+    ]),
+    "SGDRegressor" : SGDRegressor(),
+    "ANN" : MLPRegressor(),
+    "RandomForest" : RandomForestRegressor(),
+    "SVM" : SVR(),
+    "LGBM" : lgb.LGBMRegressor(),
+    "XGBoost" : xgb.XGBRegressor(),
+    "KNN" : KNeighborsRegressor()
+    }
+
+results = []
+
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(y_test)
+    
+    mae = mean_absolute_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    
+    results.append({
+     "Model" : name,
+     "MAE" : mae,
+     "MSE" : mse,
+     "R2" : r2   
+    })
+    
+    with open(f"{model}.pkl", "wb" ) as f: #writing in binary (idk wtf see documentation)
+        pickle.dump(model, f)
+        
+
+
+results_df = pd.DataFrame(results)
+results_df.to_csv("model_evaluation_results.csv", index = False)
+
+
+print("Models trained and saved to pickle file. Evalutation results stored in model_evaluation_results.csv")
