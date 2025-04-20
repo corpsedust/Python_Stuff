@@ -1,8 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, render_template_string
 import requests 
 import json 
 
 app = Flask(__name__)
+
+def home():
+    if requests.method == "POST":
+        selected = requests.form.get("Variable")
+        return render_template_string("index.html", selected = selected)
 
 def get_meme():
     url = "https://meme-api.com/gimme"
@@ -13,7 +18,7 @@ def get_meme():
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 
 
 def index():
