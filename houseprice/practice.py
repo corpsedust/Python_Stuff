@@ -74,7 +74,7 @@ for name, model in models.items():
 
 
 results_df = pd.DataFrame(results)
-results_df.to_csv("model_evaluation_results.csv", index = False)
+results_df.to_csv(r"C:\Users\vineet\Desktop\TimeSeries\houseprice\model_evaluation_results.csv", index = False)
 
 
 print("Models trained and saved to pickle file. Evalutation results stored in model_evaluation_results.csv")
