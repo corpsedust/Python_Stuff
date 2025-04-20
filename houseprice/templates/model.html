@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation Result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .data {
+            margin : 0;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1 class = "text-center">Model Evaluation Resutl</h1>
+    <div class = "container">
+        {% for table in tables%}
+            {{table|safe}}
+        {% endfor %}
+    </div>
+    <div class = "text-center mt-4">
+        <a href = "/" class = "btn btn-primary">Go Back</a>
+    </div>
+</body>
+</html>
