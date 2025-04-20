@@ -1,0 +1,1 @@
+Some issue with reading and writing file in the same folder. Best way to run this is take out the folder and run the code so this is the parent directory. 

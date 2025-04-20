@@ -13,7 +13,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import pickle 
 import os
 
-path = os.path.join(os.getcwd(), "houseprice")
+# path = os.getcwd(), "houseprice"
 data = pd.read_csv(r"C:\Users\vineet\Desktop\house_price_project\USA_Housing.csv")
 
 #Preprocessing
@@ -68,13 +68,13 @@ for name, model in models.items():
     
     
     
-    file_path = os.path.join(path, f"{name}.pkl")
-    with open(file_path, "wb") as f:  # Writing in binary mode
+    # file_path = os.path.join(path, f"{name}.pkl")
+    with open("f{name}.pkl", "wb") as f:  # Writing in binary mode
         pickle.dump(model, f)
 
 
 results_df = pd.DataFrame(results)
-results_df.to_csv(r"C:\Users\vineet\Desktop\TimeSeries\houseprice\model_evaluation_results.csv", index = False)
+results_df.to_csv(r"C:\Users\vineet\Desktop\houseprice\model_evaluation_results.csv", index = False)
 
 
 print("Models trained and saved to pickle file. Evalutation results stored in model_evaluation_results.csv")

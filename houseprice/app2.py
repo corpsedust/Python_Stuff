@@ -11,13 +11,15 @@ app = Flask(__name__)
 model_names = ["LinearRegression", "RobustRegression", "RidgeRegression", "LassoRegression", "ElasticNet",
                "PolynomialRegression", "SGDRegressor", "ANN", "RandomForest", "SVM", "LGBM", "XGBoost", "KNN"]
 
+# models = {name : pickle.load(open(f"{name}.pkl")) for name in model_names}
+import os
 
-models = {name : pickle.load(open(f'{name}.pkl')) for name in model_names}
+models = {name: pickle.load(open(os.path.join(os.getcwd(), f"{name}.pkl"), "rb")) for name in model_names}
 
 #Load Evaluation results
 
 
-results_df = pd.read_csv("model_evalueation_result")
+results_df = pd.read_csv("model_evaluation_results.csv")
 
 
 @app.route("/")
@@ -33,12 +35,12 @@ def predict():
     input_data = {
         "Avg. Area Income": float(request.form["Avg. Area Income"]),
         "Avg. Area House Age" : float(request.form["Avg. Area House Age"]),
-        "Avg. Area Number of Rooms" : float(request.form["Avg. Area No. of Rooms"]),
+        "Avg. Area Number of Rooms" : float(request.form["Avg. Area Number of Rooms"]),
         "Avg. Area Number of Bedrooms" : float(request.form["Avg. Area Number of Bedrooms"]),
         "Area Population": float(request.form["Area Population"])
     }
     
-    input_df = pd.DataFrame(input_data)
+    input_df = pd.DataFrame([input_data])
     
     if model_name in models:
         model = models[model_name]
