@@ -25,9 +25,9 @@
         <label for = "three">memes</label>
         <button type="submit">Submit</button
     </form>
-    {% if selected %}
+    {% comment %} {% if selected %}
         <p>You selected: <strong>{{ selected }}</strong></p>
-    {% endif %}
+    {% endif %} {% endcomment %}
     <p>Here is the meme, page refreshes in 15 seconds!</p>
     <p><img src = "{{meme_pic}}"></p>
     <p>Current subreddit:{{subreddit}}</p>

@@ -7,14 +7,14 @@ app = Flask(__name__)
 def home():
     if requests.method == "POST":
         selected = requests.form.get("Variable")
-        return render_template_string("index.html", selected = selected)
+        return f"You selected : {selected}"
 
 def get_meme():
     url = "https://meme-api.com/gimme"
     response = json.loads(requests.request("GET", url).text)
     meme_large = response["preview"][-2]
     subreddit = response["subreddit"]
-    return meme_large, subreddit
+    return meme_large, subreddit    
 
 app = Flask(__name__)
 
