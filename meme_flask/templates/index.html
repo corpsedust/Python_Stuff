@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>
+    Meme Website
+</title>
+<meta name = "viewport" content = "width=device-width, initial-scale = 1">
+<meta http-equiv="refresh" content="10;url=http://127.0.0.1:80">
+<style>
+    body {background-color: #000000; background-repeat:no-repeat;background-position:top left;}
+    h1{text-align:center;font-family:Arial, Helvetica, sans-serif; color: #ffffff;background-color: #000000;}
+    p{text-align:center;font-family:Georgia, serif;font-size:16px;font-style:normal;font-weight:bold;color: #ffffff;background-color: #000000;}
+    form{text-align : center;}
+</style>
+</head>
+<body>
+    <h1>A website to gather some memes</h1>
+    <p>from which subreddit you want ?</p>
+    <form method = "POST">
+        <input name = "Variable">
+        <input type = "Text">
+    </form>
+    <p>Here is the meme, page refreshes in 15 seconds!</p>
+    <p><img src = "{{meme_pic}}"></p>
+    <p>Current subreddit:{{subreddit}}</p>
+</body>
+</html>
